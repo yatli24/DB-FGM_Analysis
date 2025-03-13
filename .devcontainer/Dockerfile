@@ -11,10 +11,10 @@ RUN apt-get update && apt-get install -y \
 RUN R -e "install.packages(c('BDgraph','pheatmap','fda','coda', 'jsonlite', 'ggplot2', 'maps', 'mvtnorm', 'fgm', 'ncdf4', 'anytime', 'wavelets', 'doParallel', 'foreach', 'matrixcalc'), repos='http://cran.us.r-project.org')\""
 
 # Set work directory
-WORKDIR /home/exouser/DBFGM
+WORKDIR /home/exouser/DBFGM-Analysis
 
 # Copy your project files into the container
-COPY . /home/exouser/DBFGM
+COPY . /home/exouser/DBFGM-Analysis
 
 # Run the simulation study
 CMD ["Rscript", "Simulation_study.R"]
