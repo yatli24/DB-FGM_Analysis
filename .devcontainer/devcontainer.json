@@ -1,0 +1,37 @@
+{
+    "name": "PSTAT 234 R Project",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "overrideCommand": false,
+    "shutdownAction": "none",
+    
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/exouser/DBFGM,type=bind", 
+    "workspaceFolder": "/home/exouser/DBFGM-Analysis",
+
+    "forwardPorts": [8888],
+    "portsAttributes": {
+        "8888": {
+            "label": "Jupyterlab",
+            "onAutoForward": "ignore"
+        }
+    },
+    
+    "postCreateCommand": "R -e \"install.packages(c('BDgraph','pheatmap','fda','coda','jsonlite'), repos='http://cran.us.r-project.org')\"",
+        
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/bin/python",
+                "r.rterm.linux": "/usr/bin/R"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "quarto.quarto",
+                "analytic-signal.preview-pdf",
+                "REditorSupport.r"
+            ]
+        }
+    }
+}
