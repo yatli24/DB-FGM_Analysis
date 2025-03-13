@@ -17,8 +17,7 @@
         }
     },
     
-    "postCreateCommand": "R -e \"install.packages(c('BDgraph','pheatmap','fda','coda','jsonlite'), repos='http://cran.us.r-project.org')\"",
-        
+    "postCreateCommand": "R -e \"install.packages(c('BDgraph','pheatmap','fda','coda', 'jsonlite', 'ggplot2', 'maps', 'mvtnorm', 'fgm', 'ncdf4', 'anytime', 'wavelets', 'doParallel', 'foreach', 'matrixcalc'), repos='http://cran.us.r-project.org')\"",
     "customizations": {
         "vscode": {
             "settings": {
