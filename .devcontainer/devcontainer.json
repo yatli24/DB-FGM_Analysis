@@ -6,8 +6,8 @@
     "overrideCommand": false,
     "shutdownAction": "none",
     
-    "workspaceMount": "source=${localWorkspaceFolder},target=/home/joyvan/work,type=bind", 
-    "workspaceFolder": "/home/joyvan/work",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/exouser/DBFGM-Analysis,type=bind", 
+    "workspaceFolder": "/home/exouser/DBFGM-Analysis",
 
     "forwardPorts": [8888],
     "portsAttributes": {
