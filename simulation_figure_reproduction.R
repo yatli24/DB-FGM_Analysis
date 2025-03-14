@@ -62,7 +62,7 @@ save(data_changepoint, file=paste(folder_name, '/', file_name, sep = ""))
 
 # plot simulated data, Figure 3.1, save figures
 # Simulated graph before changepoint
-png("graph_before_changepoint.png", width = 800, height = 800)
+png("figures/graph_before_changepoint.png", width = 800, height = 800)
 pheatmap(data_changepoint$param_true$G_x_true[[1]] + 0, 
          cluster_rows=FALSE, cluster_cols=FALSE, 
          color = c("white", "black"), 
@@ -70,7 +70,7 @@ pheatmap(data_changepoint$param_true$G_x_true[[1]] + 0,
 dev.off()
 
 # Simulated graph after changepoint
-png("graph_after_changepoint.png", width = 800, height = 800)
+png("figures/graph_after_changepoint.png", width = 800, height = 800)
 pheatmap(data_changepoint$param_true$G_x_true[[2]] + 0, 
          cluster_rows=FALSE, cluster_cols=FALSE, 
          color = c("white", "black"), 
@@ -78,7 +78,7 @@ pheatmap(data_changepoint$param_true$G_x_true[[2]] + 0,
 dev.off()
 
 # plot the simulated data time series
-png("simulated_time_series.png", width = 800, height = 600)
+png("figures/simulated_time_series.png", width = 800, height = 600)
 matplot(data_changepoint$Y[1,,], type = 'l', lty = 1, col = 1:ncol(data_changepoint$Y[1,,]))
 dev.off()
 
