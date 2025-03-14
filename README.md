@@ -1,1 +1,1 @@
-# Dynamic Bayesian Functional Graphical Model Analysis
+# Bayesian Dynamic Functional Graphical Model Analysis
