@@ -55,10 +55,7 @@ data_changepoint = simulate_data(p, K_true, n, T_data, pii_local,
                                  continuous = TRUE, changepoint_true)
 
 # save the simulated data as a Rdata object
-folder_name = "Simulated_data"
-file_name = paste("Simulation_data_original.Rdata", sep = "")
-save(data_changepoint, file=paste(folder_name, '/', file_name, sep = ""))
-
+save(data_changepoint, file="Simulation_data/Simulation_data_original.Rdata")
 
 # plot simulated data, Figure 3.1, save figures
 # Simulated graph before changepoint
