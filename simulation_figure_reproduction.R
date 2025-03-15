@@ -8,7 +8,7 @@ library(coda)
 set.seed(123)
 
 # set the working directory to helper functions folder
-setwd("C:/Users/ivani/OneDrive/Documents/Offline R project/DBFGM-main/Helper_functions")
+setwd("Helper_functions")
 
 # load necessary helper functions
 source('Helper_functions_data_generation.R')
