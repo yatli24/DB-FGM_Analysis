@@ -17,6 +17,7 @@
     "customizations": {
         "vscode": {
             "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/bin/python",
                 "r.rterm.linux": "/usr/bin/R"
             },
             "extensions": [
