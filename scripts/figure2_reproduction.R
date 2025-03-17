@@ -57,7 +57,7 @@ data_changepoint = simulate_data(p, K_true, n, T_data, pii_local,
 # save the simulated data as a Rdata object
 save(data_changepoint, file="Simulation_data/Simulation_data_original.Rdata")
 
-# plot simulated data, Figure 3.1, save figures
+# plot simulated data, Figure 2, save figures
 # Simulated graph before changepoint
 png("figures/graph_before_changepoint.png", width = 800, height = 800)
 pheatmap(data_changepoint$param_true$G_x_true[[1]] + 0, 
