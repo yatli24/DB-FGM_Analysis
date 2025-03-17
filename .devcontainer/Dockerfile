@@ -1,6 +1,6 @@
 FROM r-base:4.4.1
 
-# Install system dependencies (adjust as needed)
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     libssl-dev \
     libcurl4-openssl-dev \
@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y \
 # Install required R packages
 RUN R -e "install.packages(c('BDgraph','pheatmap','fda','coda','igraph','gt','jsonlite','ggplot2','maps','mvtnorm','fgm','ncdf4','anytime','wavelets','doParallel','foreach','matrixcalc'), repos='http://cran.us.r-project.org')"
 
-# Set work directory
-WORKDIR /home/exouser/DBFGM-Analysis
+# Set work directory (matches workspaceFolder in devcontainer.json)
+WORKDIR /home/exouser/DB-FGM_Analysis
 
-# Copy files into the container
-COPY . /home/exouser/DBFGM-Analysis
+# Keep the container running
+CMD ["tail", "-f", "/dev/null"]
