@@ -1,5 +1,5 @@
 # Bayesian Dynamic Functional Graphical Model Analysis
 
-## Folder Guide
+## Repository Guide
 
-Scripts - Contains R scripts that replicate research paper's findings and figures, and performs report's unique data analysis scenario
+Scripts - Folder that contains R scripts that replicate research paper's findings and figures, and performs report's unique data analysis scenario
