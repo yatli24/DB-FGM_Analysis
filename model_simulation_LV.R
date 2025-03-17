@@ -99,7 +99,10 @@ changepoint_interval[1,] = c(109, 149)
 
 # MCMC setup
 nburn = 3000; nsave = 2000; 
+
+# adjust based on computational resources
 nrep = 50
+
 #save destination
 folder_name = "Simulation_results_DBFGM"
 dir.create(folder_name)
