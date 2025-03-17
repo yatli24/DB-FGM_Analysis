@@ -63,8 +63,20 @@ data_changepoint = simulate_data(p, K_true, n, T_data, pii_local,
 
 # save the simulated data as a Rdata object
 folder_name = "Simulation_data"
-file_name = paste("Simulation_data_new.Rdata", sep = "")
+file_name = paste("Simulation_data_changepoint.Rdata", sep = "")
 save(data_changepoint, file=paste(folder_name, '/', file_name, sep = ""))
+
+# Generate 50 replications 
+nrep = 50
+for (i in 1:nrep){
+  random_seed = 123 + rep_ind
+  data_changepoint_rep = simulate_data_replications(data_changepoint,
+                                                    continuous = TRUE,
+                                                    random_seed)
+  folder_name = "Simulation_data"
+  file_name = paste("Synthetic_data_rep", i, ".Rdata", sep = "")
+  save(data_changepoint_rep, file=paste(folder_name, '/', file_name, sep = ""))
+}
 
 # Run DBFGM
 # Model parameters
