@@ -1,0 +1,134 @@
+---
+title: "PSTAT 234 Final Project Report"
+format: 
+    html: 
+      self-contained: true
+editor: visual
+author: "Ivan Li"
+---
+
+# Introduction and Overview
+
+## Paper Summary
+
+The paper introduces an original statistical framework to analyze dynamic relationships in multivariate functional data. The authors propose a Bayesian approach to infer time-varying conditional dependencies between functional data and incorporating changepoints. They take this methodology and apply it to analyze sea surface temperature (SST) data in order to model meaningful connectivity patterns that evolve over time.
+
+In practice, graphical models are commonly used to find dependencies among random variables, but traditional approaches assume static relationships, which can be insufficient for processes that are time dependent. The authors extend functional graphical models (FGMs) by integrating Bayesian inference and changepoint detection, allowing for the identification of both time-invariant and time-varying connectivity structures. By dynamically adjusting the inferred graph over time, the approach ensures that evolving relationships are accurately captured, making it particularly useful for analyzing non-stationary data.
+
+The proposed model, called the Dynamic Bayesian Functional Graphical Model, represents functional data using basis expansions, such as B-splines and Fourier basis functions, which converts continuous functions into a finite and discrete representation. Conditional dependencies are estimated using sparse precision matrix estimation, retaining only the most relevant edges in the inferred graphical structure. Changepoints are also incorporated to allow shifts in the graphical structure over time, enhancing adaptability to dynamic systems. A block-structured spike-and-slab prior is employed to enforce sparsity and improve interpretability by grouping related variables. Markov Chain Monte Carlo (MCMC) methods are used for efficient posterior sampling and graph estimation.
+
+Mathematically, each function is expanded as:
+
+$$
+X_j(t) = \sum_{k=1}^{K} c_{j,k} f_k(t) + \epsilon_j(t),
+$$
+
+where \\( f_k(t) \\) are basis functions, \\( c\_{j,k} \\) are coefficients, and \\( \\epsilon_j(t) \\) represents noise. The precision matrix \\( \\Omega \\) encodes conditional dependencies with a block-wise sparsity prior written as
+
+$$
+p(\Omega | G, v_0, v_1, \lambda) \propto \prod N(\omega_{ij} | 0, v^2_{g_{ij}}) \cdot \prod \text{Exp}(\omega_{ii} | \lambda/2),
+$$
+
+where \\( G \\) is a latent adjacency matrix, with entries \\( G\_{ij} \\) indicating whether an edge exists between nodes \\( i \\) and \\( j \\). The prior enforces sparsity by allowing elements of \\( \\Omega \\) to be close to zero when \\( G\_{ij} = 0 \\), while allowing nonzero values when \\( G\_{ij} = 1 \\). A uniform prior is placed on the changepoint \\( \\tau \\), allowing data-driven segmentation into different graphical structures without requiring predefined breakpoints.
+
+The model parameters are estimated using Gibbs sampling, where the algorithm iteratively updates the graphical structure and the precision matrix. Given the current estimate of precision matrix \\( \\Omega \\), the binary edge indicators \\( G\_{ij} \\) are sampled using a Bernoulli posterior distribution,
+
+$$ P(G_{ij} = 1 | \Omega, \pi_{ij}) = \frac{\pi_{ij} \mathcal{N}(\omega_{ij} | 0, v_1)}{\pi_{ij} \mathcal{N}(\omega_{ij} | 0, v_1) + (1 - \pi_{ij}) \mathcal{N}(\omega_{ij} | 0, v_0)} $$
+
+where \\( v_0 \\) and \\( v_1 \\) control the sparsity of edges in the inferred graph. The precision matrix is then updated given the sampled graph structure, following a Gaussian conditional posterior,
+
+$$ \Omega | G, Y \sim \mathcal{N}(\mu_{\Omega}, \Sigma_{\Omega}), $$
+
+ensuring that the inferred precision matrix remains positive definite. The posterior distribution of \\( \\tau \\) is computed over a discrete set of possible values, using a likelihood-weighted approach,
+
+$$ P(\tau | Y, \Omega) \propto P(Y | \tau, \Omega) P(\tau), $$
+
+where \\( P(Y \| \\tau, \\Omega) \\) represents the likelihood of the data under different changepoint segmentations, and \\( P(\\tau) \\) is assumed to be uniform over possible time points. The basis expansion coefficients are updated using a Normal conditional posterior, while the error variances are sampled from an Inverse-Gamma distribution, ensuring conjugate updates for computational efficiency. This Gibbs sampling procedure is iterated until convergence, producing posterior distributions over graph structures, changepoints, and functional relationships.
+
+Model performances used in the paper are quantified using simulation studies and real-world SST data. In simulations, the authors generated data from a dynamic FGM with \\( p=15 \\) curve functions, \\( n=50 \\) replicates, and a true change-point at \\( t=129 \\), representing the days after March in observed SST data in part of the Atlantic ocean. The model is compared against frequentist and Bayesian alternatives, such as the partially separable graphical model (PSFGM), Bayesian Lasso Functional Graphical Model (BL-FGM), and the Bayesian Gaussian Graphical Model (BGGM). They demonstrate that the proposed model, on average, shows superior true positive rates (TPR), false positive rates (FPR), and Matthews correlation coefficients (MCC), where TPR measures the proportion of correctly identified edges among true edges, FPR measures the proportion of falsely identified edges among non-existent edges, and MCC provides an overall classification success measure that can be written as
+
+$$
+MCC = \frac{TP \times TN - FP \times FN}{\sqrt{(TP + FP) (TP + FN) (TN + FP) (TN + FN)}}.
+$$
+
+Applying the model to SST data from the Pacific Ocean reveals climate-driven dependency changes, such as a detected changepoint around late August, aligning with known seasonal shifts. Pre-changepoint graphs indicate zonal (east-west) dependencies, while post-changepoint graphs highlight meridional (north-south) dependencies, reflecting ocean circulation patterns and atmospheric influences.
+
+The proposed model's application to climate science demonstrates its practical utility, with potential extensions to finance, neuroscience, and epidemiology. However, future work could explore scalability improvements, non-Gaussian extensions, and alternative inference methods such as variational Bayes to further enhance its applicability in large-scale problems.
+
+## Report Goals
+
+This report aims to evaluate and extend the methodology proposed in the referenced paper by replicating its findings, reproducing key figures, and conducting a unique data analysis scenario on simulated sea surface temperature (SST) data, as while the original analysis employed a general simulation framework with a defined changepoint, it lacked a detailed simulation scenario. To address this, I will apply the paper’s methodology to simulated SST patterns representative of Lake Victoria Basin, a region of interest due to its seasonal variability and implications for food security. The extension of the analysis will focus on computational performance by conducting and documenting runtime on a Jetstream2 m3.medium instance.
+
+## Considerations
+
+### Code Scripts Flowchart
+
+The authors of the paper maintain a publicly available GitHub repository that provides various functions supporting their methodology, including data simulation and Markov Chain Monte Carlo (MCMC) algorithms. This report utilizes select functions from that repository.
+
+Takes about 15 minutes to connect to the Devcontainer.
+
+This report will analyze three different models; the proposed model (DBFGM), PSFGM, and BGGM. This is done for computational efficiency, as the other model that the paper explored (BLFGM) took about 6 hours to run.
+
+Regarding the GitHub repository that stores the analyses and reproductions described in this report, the RData objects generated during performance evaluation of the proposed model are approximately 200 MB each, which exceed the file size limit of GitHub. This is due to the computational nature of the proposed model, so these data files are not included in the repository but can be generated by running the *model_performance_paper.R* and *model_performance_simulation.R* scripts. However, executing these scripts requires significant computational resources, taking approximately three hours on an *m3.medium* Jetstream2 instance to run. The number of repetitions (*nreps*) can be adjusted to a lower value for each respective model to reduce computational time. The performance evaluation results presented in the report, including tabular and visual summaries, were generated from these scripts, stored in RData objects using the *analyze_simulation_results.R* script, and hosted on GitHub for convenient reproduction of this report. Similarly, the observed SST dataset analyzed in the paper exceeds 50 GB and cannot be hosted on GitHub.
+
+# Re-implementation of Paper
+
+## Outline
+
+This section aims to replicate the methodology presented in the referenced paper by recreating its key analyses and figures, as well as provide additional data visualizations not included in the original paper. The paper first shows the observed seasonality trend of a specific region in the Atlantic Ocean. However, due to the large size of the original dataset (over 50 GB), I will simulate the observed data to replicate the paper's figure. The paper then simulates graphical data and provides a visual representation. To improve interpretability, I will also visualize the simulated data as a time series. Finally, the paper evaluates multiple models on this simulated dataset, originally running five models with 50 replicates, varying parameters such as the number of functions (curves) but keeping the changepoint constant. As previously mentioned, I will implement the proposed method, PSFGM, and BGGM, then compare their performance using TPR, FPR, and MCC metrics. While the original paper presents these comparisons in a table, I will also compile a bar chart visualization.
+
+## Figure 2 re-implementation
+
+After simulating graphical data, the paper visualized the graphical relationships before and after the changepoint with figures similar to the one below
+
+![Graph representation of data before changepoint](figures/graph_before_changepoint.png){alt="Graph representation of data before changepoint" width="49%"} ![Graph representation of data after changepoint](figures/graph_after_changepoint.png){alt="Graph representation of data after changepoint" width="49%"}
+
+These figures show the graphical relationship between the simulated data before (left) and after (right) the changepoint.
+
+They look different because the authors likely used a different seed than I did, and I do not know their seed
+
+To get an idea of what this graphical data looks like as a time series, I've generated a time series visualization below. This figure was not included in the original paper
+
+![](figures/og_simulated_time_series.png)
+
+This shows a general functional graphical relationship over time that can be generalized for any data that exhibits functional graphical relationship.
+
+## Figure 3 re-implementation
+
+To reproduce Figure 3, simulated SST data with a changepoint (*τ*) at 180 was used instead to replicate the trend due to GitHub file size constraints.
+
+show picture of figure. In the paper, the figure represents blah. The re implementation shows blah because the sst data is too damn large, found at this link here
+
+## Results and Analysis
+
+The 3 models are ran on the simulated data with 50 replicates, each replicate varying the number of functions (curves), but keeping the changepoint constant at 129.
+
+![](figures/model_runtimes.png){width="654"}
+
+here are the final results side by side, we see that their model performs pretty well, but this is only done for a changepoint value of 129.
+
+# Extension of Numerical Section
+
+## Outline
+
+here, I will change the sample size and changepoint value of the simulated data, as well as the curves. This simulates the seasonality trend of lake victoria sst. then, I will run the models on this new simulated data
+
+## Figure Blah
+
+Not originally shown in the paper, this figure shows the changepoint of the original simulated data
+
+![](figures/og_simulated_time_series.png)
+
+## Figure Blah
+
+This figure shows the new changepoint with more sample size and more curves relating to LV basin OND seasonality, as the plot x is showing days after march
+
+![](figures/LV_simulation_time_series.png)
+
+## Results and Analysis
+
+Here are the final results side by side, we see that their model performs slightly better than pfgm, but the computational time of their model was 5 hrs compared to pfgms 3 minutes. use x, for example, 1200x slower
+
+# Conclusion
+
+Overall, the paper proposes a pretty cool method that does do better at times, but its computationally expensive, and in some cases performs comparably to other methods. In this case, for one dimensional sst data, a region of interest could take 5 hrs to run with minimal improvement of estimation. If this was applied to high dimensional data such as those of a large scale climate model, it would struggle.
