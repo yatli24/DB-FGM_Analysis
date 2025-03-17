@@ -66,18 +66,6 @@ folder_name = "Simulation_data"
 file_name = paste("Simulation_data_new.Rdata", sep = "")
 save(data_changepoint, file=paste(folder_name, '/', file_name, sep = ""))
 
-# plot the new simulated data, save image
-png("LV_simulation_time_series.png", width = 800, height = 800)
-matplot(data_changepoint$Y[1,,], 
-        type = 'l', 
-        lty = 1, 
-        col = 1:ncol(data_changepoint$Y[1,,]), 
-        xlab = "Days After March", 
-        ylab = "Simulated SST", 
-        main = "Simulated Seasonlity Trend of Lake Victoria Basin SST")
-
-dev.off()
-
 # Run DBFGM
 # Model parameters
 
@@ -162,3 +150,15 @@ file.edit('Helper_functions/Simulations_BGGM_rep.R')
 
 # Compare performance of models
 file.edit('Helper_functions/analyze_simulation_results.R')
+
+# plot the new simulated data, save image
+png("LV_simulation_time_series.png", width = 800, height = 800)
+matplot(data_changepoint$Y[1,,], 
+        type = 'l', 
+        lty = 1, 
+        col = 1:ncol(data_changepoint$Y[1,,]), 
+        xlab = "Days After March", 
+        ylab = "Simulated SST", 
+        main = "Simulated Seasonlity Trend of Lake Victoria Basin SST")
+
+dev.off()
