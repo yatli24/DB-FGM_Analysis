@@ -5,8 +5,8 @@
     },
     "overrideCommand": false,
     "shutdownAction": "none",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/home/exouser/DB-FGM_Analysis,type=bind", 
-    "workspaceFolder": "/home/exouser/DB-FGM_Analysis",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "workspaceFolder": "/workspace",
     "forwardPorts": [8888],
     "portsAttributes": {
         "8888": {
