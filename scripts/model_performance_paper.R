@@ -60,18 +60,20 @@ data_changepoint = simulate_data(p, K_true, n, T_data, pii_local,
                                  continuous = TRUE, changepoint_true)
 
 # save the simulated data as a Rdata object
-save(data_changepoint, file="Simulation_data/Simulation_data_original.Rdata")
-
+folder_name = "Simulation_data"
+file_name = paste("Simulation_data_changepoint.Rdata", sep = "")
+save(data_changepoint, file=paste(folder_name, '/', file_name, sep = ""))
 
 # Generate 50 replications 
-nrep = 50 # adjust based on computational resources
-
+nrep = 50
 for (i in 1:nrep){
-  random_seed = 123 + i
+  random_seed = 123 + rep_ind
   data_changepoint_rep = simulate_data_replications(data_changepoint,
                                                     continuous = TRUE,
                                                     random_seed)
-  save(data_changepoint_rep, file=paste("Simulation_data/Synthetic_data_rep", i, ".Rdata", sep = ""))
+  folder_name = "Simulation_data"
+  file_name = paste("Synthetic_data_rep", i, ".Rdata", sep = "")
+  save(data_changepoint_rep, file=paste(folder_name, '/', file_name, sep = ""))
 }
 
 # Run DBFGM
