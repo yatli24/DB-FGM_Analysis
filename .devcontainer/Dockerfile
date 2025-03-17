@@ -13,5 +13,5 @@ RUN R -e "install.packages(c('BDgraph','pheatmap','fda','coda','igraph','gt','js
 # Set work directory
 WORKDIR /home/exouser/DBFGM-Analysis
 
-# Copy your project files into the container
+# Copy files into the container
 COPY . /home/exouser/DBFGM-Analysis
