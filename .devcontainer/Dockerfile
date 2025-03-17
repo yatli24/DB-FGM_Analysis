@@ -15,6 +15,3 @@ WORKDIR /home/exouser/DBFGM-Analysis
 
 # Copy your project files into the container
 COPY . /home/exouser/DBFGM-Analysis
-
-# Run the simulation study
-CMD ["Rscript", "Simulation_study.R"]
