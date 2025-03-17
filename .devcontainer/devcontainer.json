@@ -5,10 +5,8 @@
     },
     "overrideCommand": false,
     "shutdownAction": "none",
-
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/exouser/DB-FGM_Analysis,type=bind", 
     "workspaceFolder": "/home/exouser/DB-FGM_Analysis",
-
     "forwardPorts": [8888],
     "portsAttributes": {
         "8888": {
@@ -16,8 +14,6 @@
             "onAutoForward": "ignore"
         }
     },
-
-    "postCreateCommand": "R -e \"install.packages(c('BDgraph','pheatmap','fda','coda', 'igraph', 'gt', 'jsonlite', 'ggplot2', 'maps', 'mvtnorm', 'fgm', 'ncdf4', 'anytime', 'wavelets', 'doParallel', 'foreach', 'matrixcalc'), repos='http://cran.us.r-project.org')\"",
     "customizations": {
         "vscode": {
             "settings": {
