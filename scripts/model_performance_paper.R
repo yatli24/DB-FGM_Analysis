@@ -60,7 +60,7 @@ data_changepoint = simulate_data(p, K_true, n, T_data, pii_local,
                                  continuous = TRUE, changepoint_true)
 
 # save the simulated data as a Rdata object
-save(data_changepoint, file="Simulated_data/Simulation_data_original.Rdata")
+save(data_changepoint, file="Simulation_data/Simulation_data_original.Rdata")
 
 
 # Generate 50 replications 
