@@ -69,7 +69,7 @@ save(data_changepoint, file=paste(folder_name, '/', file_name, sep = ""))
 # Generate 50 replications 
 nrep = 50
 for (i in 1:nrep){
-  random_seed = 123 + rep_ind
+  random_seed = 123 + i
   data_changepoint_rep = simulate_data_replications(data_changepoint,
                                                     continuous = TRUE,
                                                     random_seed)
