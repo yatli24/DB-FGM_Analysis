@@ -2,7 +2,7 @@
 # sample size, curves, and changepoint to model the seasonality trend in Lake
 # Victorial Basin. It stores the results into a folder of the current directory. 
 # After running this script, the results are compiled into tables for 
-# visualizations with the analyze_simulation_results.R script
+# visualizations with the analyze_simulation_results.R script, located in Helper_functions folder
 
 
 # load necessary packages
