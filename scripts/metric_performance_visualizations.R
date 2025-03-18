@@ -1,6 +1,10 @@
 # This script generates the figures and tables for the performance comparisons
 # of the models using the RData files generated from analyze_simulation_results.R
 
+## access analyze_simulation_results.R if needed 
+# (must be run after running model_performance_paper.R or model_performance_LV.R)
+# file.edit('Helper_functions/analyze_simulation_results.R')
+
 library(ggplot2)
 library(dplyr)
 library(gt)
