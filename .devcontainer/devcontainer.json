@@ -3,6 +3,7 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
+    "postCreateCommand": "apt-get update && apt-get install -y pandoc",
     "overrideCommand": false,
     "shutdownAction": "none",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
