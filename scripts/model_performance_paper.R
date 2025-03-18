@@ -1,7 +1,7 @@
 # This script replicates the findings from the paper, and stores the results
 # into a folder of the current directory. After running this script,
 # the results are compiled into tables for visualizations with the 
-# analyze_simulation_results.R script
+# analyze_simulation_results.R script, located in the helper_functions folder
 
 # load necessary packages
 library(BDgraph)
