@@ -11,3 +11,5 @@ scripts - Folder that contains R scripts that replicate research paper's finding
 figures - Folder that stores all figures generated from scripts in scripts folder
 
 _data folders - Folders that store simulated and performance metric data of each model that was used in this analysis. These folders are created and populated automatically via the scripts in the scripts folder
+
+table_data - Folder that stores the tabular summaries of the model performancess as RData objects
