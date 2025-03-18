@@ -1,5 +1,5 @@
 # This script extends on the findings of the paper by running an increased
-# sample size, curves, and changepoint to model the seasonality trend in Lake
+# sample size, curves, and changepoint to model the OND seasonality trend in Lake
 # Victorial Basin. It stores the results into a folder of the current directory. 
 # After running this script, the results are compiled into tables for 
 # visualizations with the analyze_simulation_results.R script, located in Helper_functions folder
