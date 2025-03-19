@@ -17,3 +17,5 @@ Simulation_data - Folder that stores simulated data that was used in this analys
 Simulation_results folders - Folders that store the results of each model run on the paper's analysis and the unique analysis as RData objects. These folders are created and populated automatically via the scripts in the scripts folder
 
 table_data - Folder that stores the tabular summaries of the model performancess as RData objects
+
+Link to original paper - https://arxiv.org/pdf/2405.03041
