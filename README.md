@@ -2,7 +2,9 @@
 
 ## Repository Guide
 
-final_report.rmd - Main report file
+final_report.Rmd - Main report file in RMD (Renders on Jetstream2)
+
+final_report.qmd - Main report file (Errors Rendering on Jetstream 2)
 
 final_report.pdf - Rendered report file
 
