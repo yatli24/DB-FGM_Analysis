@@ -4,6 +4,8 @@
 
 final_report.rmd - Main report file
 
+final_report.pdf - Rendered report file
+
 Helper_functions - Folder that contains helper functions used to recreate simulations, where a select few are from the paper's GitHub
 
 scripts - Folder that contains R scripts that replicate research paper's findings and figures, and performs report's unique data analysis scenario
