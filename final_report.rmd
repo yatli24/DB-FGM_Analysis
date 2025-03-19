@@ -3,7 +3,6 @@ title: "PSTAT 234 Final Project Report"
 format: 
     html: 
       self-contained: true
-editor: visual
 author: "Ivan Li"
 ---
 
